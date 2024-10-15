@@ -1,0 +1,30 @@
+<div class="row">
+    <h1 class="text-center my-5"><%=title%></h1>
+
+</div>
+
+<div class="row">
+  <h1 class="text-center my-5"><%title%></h1>
+  <div id="div_list"></div>
+  
+</div>
+
+<script>
+  let query = "자바";
+  let size = 12;
+  let page = 1;
+  getList();
+    function getList(){
+        $.ajax({
+            type:"get",
+            url:"https://dapi.kakao.com/v3/search/book?target=title",
+            data: {query:query, size:size, page:page},
+            headers:{
+                "Authorization": "KakaoAK 7dc21d5852274d162cc3c15163505083"
+            },
+            success:function(data){
+                console.log(data);
+            }
+        });
+    }
+</script>

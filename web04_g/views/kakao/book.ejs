@@ -41,30 +41,30 @@
           return JSON.stringify(book);
         });
     </script>
-</div>
-<script type="module">
+  </div>
+  <script type="module">
     import {app} from '/javascripts/config.js';
     import {getDatabase, ref, set, get} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
     const db = getDatabase(app);
-
+  
     let query=$(frm.query).val();
     let page=1;
     let size=5;
-
+  
     getList();
-
+  
     //다음버튼을 클릭한 경우
     $("#next").on("click", function(){
         page++;
         getList();
     });
-
+  
     //이전버튼을 클릭한 경우
     $("#prev").on("click", function(){
         page--;
         getList();
     });
-
+  
     //폼이 Submit되는 경우
     $(frm).on("submit", function(e){
         e.preventDefault();
@@ -75,26 +75,17 @@
             getList();
         }
     });
-
+  
     //장바구니 버튼을 클릭한 경우
-    $("#div_list").on("click", ".cart",async function(){
-        if(uid){
-            const book = JSON.parse($(this).attr("book"));
-            console.log(book);
-            const ref_cart = ref(db, `cart/${uid}/${book.isbn}`);
-            const snapshot = await get(ref_cart)
-            if(snapshot.val()){
-                alert("장바구니에 이미 존재하는 도서입니다.");
-            }else{
-                await set(ref_cart, book);
-                alert("장바구니에 등록되었습니다.")
-            }
-        }else{
-            sessionStorage.setItem("target", window.location.href);
-            location.href="/users/login";
-        }
-    });
-
+    $("div_list").on("click", ".cart", function(){
+          if(email){
+  
+          }else{
+              sessionStorage.setItem("target",window.location.href )
+              location.href="/users/login"
+          }
+      })
+  
     //도서목록 함수
     function getList(){
         $.ajax({
@@ -108,10 +99,10 @@
                 console.log(data);
                 const temp=Handlebars.compile($("#temp_list").html());
                 $("#div_list").html(temp(data));
-
+  
                 const last = Math.ceil(data.meta.pageable_count/size);
                 $("#page").html(page + "/" + last);
-
+  
                 if(page==1) $("#prev").attr("disabled", true)
                 else $("#prev").attr("disabled", false)
             
@@ -120,4 +111,4 @@
             }
         });
     }
-</script>
+  </script>
