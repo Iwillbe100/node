@@ -1,12 +1,12 @@
 <style>
   .thumbnail-img {
-    height: 150px; /* 실제 썸네일 이미지의 높이를 설정 */
-    object-fit: cover; /* 이미지를 영역에 맞게 조정 */
+    height: 150px; 
+    object-fit: cover;
   }
   
   .no-image-img {
-    height: 150px; /* no_image.png의 높이를 다른 이미지와 동일하게 설정 */
-    object-fit: contain; /* 이미지를 비율에 맞게 조정 */
+    height: 150px;
+    object-fit: contain;
   }
 </style>
 
@@ -52,14 +52,14 @@
   let page=1;
   let size=12;
   $("#searchButton").click(function(){
-    query = $("#searchInput").val();  // 입력된 검색어로 query 업데이트
+    query = $("#searchInput").val();
     getList();
   });
   getList();
 
   //이미지를 클릭한 경우
   $("#div_list").on("click", "img", function(){
-      let info = $(this).data("info");  // data-info 속성에서 값을 가져옴
+      let info = $(this).data("info");
       console.log(info);
       location.href = `/kakao/book/info?title=${info.title}&thumbnail=${info.thumbnail}&isbn=${info.isbn}&price=${info.price}&authors=${info.authors}&publisher=${info.publisher}&contents=${info.contents}`;
     });
